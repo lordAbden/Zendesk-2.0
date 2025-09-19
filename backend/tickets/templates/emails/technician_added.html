@@ -1,0 +1,37 @@
+{% extends "emails/base_email.html" %}
+
+{% block content %}
+<h2>Vous avez été Ajouté à un Ticket</h2>
+
+<p>Bonjour {{ technician.get_full_name }},</p>
+
+<p>Vous avez été ajouté comme technicien supplémentaire à un ticket existant.</p>
+
+<div class="ticket-info">
+    <h3>Détails du Ticket</h3>
+    <p><strong>ID du Ticket:</strong> {{ ticket.short_id }}</p>
+    <p><strong>Sujet:</strong> {{ ticket.subject }}</p>
+    <p><strong>Type:</strong> {{ ticket.get_type_display }}</p>
+    <p><strong>Priorité:</strong> {{ ticket.priority }}</p>
+    <p><strong>Créé par:</strong> {{ ticket.requester.get_full_name }} ({{ ticket.requester.email }})</p>
+    <p><strong>Technicien principal:</strong> {{ ticket.claimed_by.get_full_name }} ({{ ticket.claimed_by.email }})</p>
+    <p><strong>Ajouté par:</strong> {{ event.actor.get_full_name }} ({{ event.actor.email }})</p>
+    <p><strong>Date d'ajout:</strong> {{ event.created_at|date:"d/m/Y H:i" }}</p>
+    <p><strong>Description:</strong></p>
+    <div style="background-color: white; padding: 10px; border-radius: 4px; margin-top: 10px;">
+        {{ ticket.description|safe }}
+    </div>
+</div>
+
+{% if ticket.priority in 'P1,P2' %}
+<div class="urgent">
+    ⚠️ TICKET HAUTE PRIORITÉ - COLLABORATION REQUISE ⚠️
+</div>
+{% endif %}
+
+<p>Veuillez vous coordonner avec l'équipe pour résoudre ce ticket efficacement.</p>
+
+<a href="{{ ticket_url }}" class="button">Voir le Ticket</a>
+
+<p>Cordialement,<br>L'équipe Support Ticket DGM</p>
+{% endblock %}

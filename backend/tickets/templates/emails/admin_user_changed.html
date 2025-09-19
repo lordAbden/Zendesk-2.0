@@ -1,0 +1,33 @@
+{% extends "emails/base_email.html" %}
+
+{% block content %}
+<h2>Modification de Compte Utilisateur</h2>
+
+<p>Bonjour Administrateur,</p>
+
+<p>Un utilisateur a modifié ses informations de compte.</p>
+
+<div class="ticket-info">
+    <h3>Détails de l'Utilisateur</h3>
+    <p><strong>Nom d'utilisateur:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Rôle:</strong> {{ user.get_role_display }}</p>
+    <p><strong>Groupe:</strong> {{ user.get_group_display }}</p>
+    <p><strong>Date de modification:</strong> {{ changed_at|date:"d/m/Y H:i" }}</p>
+</div>
+
+<div class="ticket-info">
+    <h3>Modifications Apportées</h3>
+    {% for field, change in changes.items %}
+    <p><strong>{{ field|title }}:</strong></p>
+    <ul>
+        <li><strong>Ancien:</strong> {{ change.old }}</li>
+        <li><strong>Nouveau:</strong> {{ change.new }}</li>
+    </ul>
+    {% endfor %}
+</div>
+
+<p>Cette modification a été effectuée automatiquement par l'utilisateur.</p>
+
+<p>Cordialement,<br>Système de Notification DGM</p>
+{% endblock %}

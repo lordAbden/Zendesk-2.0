@@ -1,0 +1,35 @@
+{% extends "emails/base_email.html" %}
+
+{% block content %}
+<h2>Nouveau Ticket Créé</h2>
+
+<p>Bonjour,</p>
+
+<p>Un nouveau ticket a été créé par un employé et nécessite votre attention.</p>
+
+<div class="ticket-info {% if ticket.priority in 'P1,P2' %}priority-high{% endif %}">
+    <h3>Détails du Ticket</h3>
+    <p><strong>ID du Ticket:</strong> {{ ticket.short_id }}</p>
+    <p><strong>Sujet:</strong> {{ ticket.subject }}</p>
+    <p><strong>Type:</strong> {{ ticket.get_type_display }}</p>
+    <p><strong>Priorité:</strong> {{ ticket.priority }}</p>
+    <p><strong>Créé par:</strong> {{ ticket.requester.get_full_name }} ({{ ticket.requester.email }})</p>
+    <p><strong>Date de création:</strong> {{ ticket.created_at|date:"d/m/Y H:i" }}</p>
+    <p><strong>Description:</strong></p>
+    <div style="background-color: white; padding: 10px; border-radius: 4px; margin-top: 10px;">
+        {{ ticket.description|safe }}
+    </div>
+</div>
+
+{% if ticket.priority in 'P1,P2' %}
+<div class="urgent">
+    ⚠️ TICKET HAUTE PRIORITÉ - ACTION IMMÉDIATE REQUISE ⚠️
+</div>
+{% endif %}
+
+<p>Veuillez vous connecter au système pour réclamer et traiter ce ticket.</p>
+
+<a href="{{ ticket_url }}" class="button">Voir le Ticket</a>
+
+<p>Cordialement,<br>L'équipe Support Ticket DGM</p>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "emails/base_email.html" %}
+
+{% block content %}
+<h2>Rapport de Fermeture de Ticket</h2>
+
+<p>Bonjour Administrateur,</p>
+
+<p>Un ticket a été fermé et le rapport de fermeture est joint à cet email.</p>
+
+<div class="ticket-info">
+    <h3>Détails du Ticket</h3>
+    <p><strong>ID du Ticket:</strong> {{ ticket.short_id }}</p>
+    <p><strong>Sujet:</strong> {{ ticket.subject }}</p>
+    <p><strong>Type:</strong> {{ ticket.get_type_display }}</p>
+    <p><strong>Priorité:</strong> {{ ticket.priority }}</p>
+    <p><strong>Créé par:</strong> {{ ticket.requester.get_full_name }} ({{ ticket.requester.email }})</p>
+    <p><strong>Fermé par:</strong> {{ closure_report.technician.get_full_name }} ({{ closure_report.technician.email }})
+    </p>
+    <p><strong>Date de fermeture:</strong> {{ closure_report.created_at|date:"d/m/Y H:i" }}</p>
+    <p><strong>Date de création:</strong> {{ ticket.created_at|date:"d/m/Y H:i" }}</p>
+</div>
+
+<div class="ticket-info">
+    <h3>Résumé de la Résolution</h3>
+    <p><strong>Résolution:</strong> {{ closure_report.resolution_summary }}</p>
+    <p><strong>Temps de résolution:</strong> {{ closure_report.resolution_time_display }}</p>
+    {% if closure_report.technician_notes %}
+    <p><strong>Notes du technicien:</strong></p>
+    <div style="background-color: white; padding: 10px; border-radius: 4px; margin-top: 10px;">
+        {{ closure_report.technician_notes|safe }}
+    </div>
+    {% endif %}
+</div>
+
+<p>Le rapport détaillé de fermeture est joint à cet email en pièce jointe.</p>
+
+<p>Cordialement,<br>Système de Notification DGM</p>
+{% endblock %}

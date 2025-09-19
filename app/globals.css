@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar styles */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* ReactQuill custom styles */
+.ql-editor {
+    min-height: 150px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.ql-toolbar {
+    border-top: 1px solid #d1d5db;
+    border-left: 1px solid #d1d5db;
+    border-right: 1px solid #d1d5db;
+    border-bottom: none;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.ql-container {
+    border-bottom: 1px solid #d1d5db;
+    border-left: 1px solid #d1d5db;
+    border-right: 1px solid #d1d5db;
+    border-top: none;
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.ql-editor.ql-blank::before {
+    color: #9ca3af;
+    font-style: normal;
+    font-size: 14px;
+}
+
+/* Basic styling for ticket descriptions */
+.ticket-description p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.ticket-description h1,
+.ticket-description h2,
+.ticket-description h3 {
+    margin: 1rem 0 0.5rem 0;
+    font-weight: 600;
+}
+
+.ticket-description ul,
+.ticket-description ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.ticket-description a {
+    color: #3b82f6;
+    text-decoration: underline;
+}
+
+.ticket-description strong {
+    font-weight: 600;
+}
+
+.ticket-description em {
+    font-style: italic;
+}
+
+.ticket-description u {
+    text-decoration: underline;
+}
+
+/* Focus styles for ReactQuill */
+.focus-within\:ring-2:focus-within {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus-within\:ring-blue-500:focus-within {
+    --tw-ring-color: rgb(59 130 246);
+}
+
+.focus-within\:border-transparent:focus-within {
+    border-color: transparent;
+}
+
+/* Button styles */
+.btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+}
+
+.btn-warning {
+    @apply bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+}
+
+/* Apple-inspired Dashboard Cards */
+.apple-card {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10 transition-all duration-300 ease-out;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.apple-card:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.apple-card-icon {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.apple-card-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.apple-card-number {
+    @apply text-3xl font-semibold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+.apple-card-title {
+    @apply text-sm font-medium text-gray-600/80;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+}
+
+.apple-card-arrow {
+    @apply w-5 h-5 text-gray-400/60 transition-all duration-300;
+}
+
+.apple-card:hover .apple-card-arrow {
+    @apply text-gray-600/80 transform translate-x-1;
+}
+
+/* Status-specific color schemes */
+.apple-card-unassigned {
+    @apply text-amber-600;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+}
+
+.apple-card-in-progress {
+    @apply text-blue-600;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+}
+
+.apple-card-closed {
+    @apply text-emerald-600;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
+}
+
+.apple-card-reopened {
+    @apply text-orange-600;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(234, 88, 12, 0.05) 100%);
+}
+
+.apple-card-total {
+    @apply text-purple-600;
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(126, 34, 206, 0.05) 100%);
+}
+
+/* Dashboard container */
+.apple-dashboard-container {
+    @apply space-y-8;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    min-height: 100vh;
+}
+
+.apple-dashboard-title {
+    @apply text-3xl font-semibold text-gray-900 mb-2;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.apple-dashboard-subtitle {
+    @apply text-gray-600/80 text-sm;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+}

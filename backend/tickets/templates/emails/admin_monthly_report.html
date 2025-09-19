@@ -1,0 +1,51 @@
+{% extends "emails/base_email.html" %}
+
+{% block content %}
+<h2>Rapport Mensuel des Statistiques</h2>
+
+<p>Bonjour Administrateur,</p>
+
+<p>Voici le rapport mensuel des statistiques du système de tickets pour le mois de {{ month_name }} {{ year }}.</p>
+
+<div class="ticket-info">
+    <h3>Résumé des Statistiques</h3>
+    <p><strong>Période:</strong> {{ month_name }} {{ year }}</p>
+    <p><strong>Total des tickets:</strong> {{ stats.total_tickets }}</p>
+    <p><strong>Tickets ouverts:</strong> {{ stats.open_tickets }}</p>
+    <p><strong>Tickets fermés:</strong> {{ stats.closed_tickets }}</p>
+    <p><strong>Tickets en cours:</strong> {{ stats.in_progress_tickets }}</p>
+    <p><strong>Temps moyen de résolution:</strong> {{ stats.avg_resolution_time }}</p>
+</div>
+
+<div class="ticket-info">
+    <h3>Répartition par Type</h3>
+    <ul>
+        {% for type, count in stats.tickets_by_type.items %}
+        <li><strong>{{ type }}:</strong> {{ count }} tickets</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="ticket-info">
+    <h3>Répartition par Priorité</h3>
+    <ul>
+        {% for priority, count in stats.tickets_by_priority.items %}
+        <li><strong>{{ priority }}:</strong> {{ count }} tickets</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="ticket-info">
+    <h3>Performance des Techniciens</h3>
+    <ul>
+        {% for tech, data in stats.technician_performance.items %}
+        <li><strong>{{ tech }}:</strong> {{ data.tickets_resolved }} tickets résolus, Temps moyen: {{ data.avg_time }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<p>Les captures d'écran détaillées des statistiques sont jointes à cet email.</p>
+
+<p>Cordialement,<br>Système de Notification DGM</p>
+{% endblock %}

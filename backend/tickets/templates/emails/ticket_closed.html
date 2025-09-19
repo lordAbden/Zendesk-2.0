@@ -1,0 +1,41 @@
+{% extends "emails/base_email.html" %}
+
+{% block content %}
+<h2>Votre Ticket a été Fermé</h2>
+
+<p>Bonjour {{ ticket.requester.get_full_name }},</p>
+
+<p>Votre ticket a été résolu et fermé par notre équipe technique.</p>
+
+<div class="ticket-info">
+    <h3>Détails du Ticket</h3>
+    <p><strong>ID du Ticket:</strong> {{ ticket.short_id }}</p>
+    <p><strong>Sujet:</strong> {{ ticket.subject }}</p>
+    <p><strong>Type:</strong> {{ ticket.get_type_display }}</p>
+    <p><strong>Priorité:</strong> {{ ticket.priority }}</p>
+    <p><strong>Fermé par:</strong> {{ event.actor.get_full_name }} ({{ event.actor.email }})</p>
+    <p><strong>Date de fermeture:</strong> {{ event.created_at|date:"d/m/Y H:i" }}</p>
+    <p><strong>Date de création:</strong> {{ ticket.created_at|date:"d/m/Y H:i" }}</p>
+</div>
+
+{% if closure_report %}
+<div class="ticket-info">
+    <h3>Rapport de Fermeture</h3>
+    <p><strong>Résolution:</strong> {{ closure_report.resolution_summary }}</p>
+    <p><strong>Temps de résolution:</strong> {{ closure_report.resolution_time_display }}</p>
+    {% if closure_report.technician_notes %}
+    <p><strong>Notes du technicien:</strong></p>
+    <div style="background-color: white; padding: 10px; border-radius: 4px; margin-top: 10px;">
+        {{ closure_report.technician_notes|safe }}
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+<p>Si vous rencontrez encore des problèmes ou si vous n'êtes pas satisfait de la résolution, vous pouvez rouvrir ce
+    ticket.</p>
+
+<a href="{{ ticket_url }}" class="button">Voir le Ticket</a>
+
+<p>Merci d'avoir utilisé notre système de support,<br>L'équipe Support Ticket DGM</p>
+{% endblock %}

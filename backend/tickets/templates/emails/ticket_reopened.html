@@ -1,0 +1,26 @@
+{% extends "emails/base_email.html" %}
+
+{% block content %}
+<h2>Votre Ticket a été Rouvert</h2>
+
+<p>Bonjour {{ ticket.requester.get_full_name }},</p>
+
+<p>Votre ticket a été rouvert et sera à nouveau traité par notre équipe technique.</p>
+
+<div class="ticket-info">
+    <h3>Détails du Ticket</h3>
+    <p><strong>ID du Ticket:</strong> {{ ticket.short_id }}</p>
+    <p><strong>Sujet:</strong> {{ ticket.subject }}</p>
+    <p><strong>Type:</strong> {{ ticket.get_type_display }}</p>
+    <p><strong>Priorité:</strong> {{ ticket.priority }}</p>
+    <p><strong>Rouvert par:</strong> {{ event.actor.get_full_name }} ({{ event.actor.email }})</p>
+    <p><strong>Date de réouverture:</strong> {{ event.created_at|date:"d/m/Y H:i" }}</p>
+    <p><strong>Date de création originale:</strong> {{ ticket.created_at|date:"d/m/Y H:i" }}</p>
+</div>
+
+<p>Notre équipe va examiner à nouveau votre problème et vous fournir une solution.</p>
+
+<a href="{{ ticket_url }}" class="button">Voir le Ticket</a>
+
+<p>Merci pour votre patience,<br>L'équipe Support Ticket DGM</p>
+{% endblock %}

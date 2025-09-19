@@ -1,0 +1,25 @@
+{% extends "emails/base_email.html" %}
+
+{% block content %}
+<h2>Votre Ticket a été Réclamé</h2>
+
+<p>Bonjour {{ ticket.requester.get_full_name }},</p>
+
+<p>Nous avons une bonne nouvelle ! Votre ticket a été réclamé par un technicien et sera traité prochainement.</p>
+
+<div class="ticket-info">
+    <h3>Détails du Ticket</h3>
+    <p><strong>ID du Ticket:</strong> {{ ticket.short_id }}</p>
+    <p><strong>Sujet:</strong> {{ ticket.subject }}</p>
+    <p><strong>Type:</strong> {{ ticket.get_type_display }}</p>
+    <p><strong>Priorité:</strong> {{ ticket.priority }}</p>
+    <p><strong>Réclamé par:</strong> {{ event.actor.get_full_name }} ({{ event.actor.email }})</p>
+    <p><strong>Date de réclamation:</strong> {{ event.created_at|date:"d/m/Y H:i" }}</p>
+</div>
+
+<p>Le technicien assigné va maintenant examiner votre problème et vous contacter si nécessaire.</p>
+
+<a href="{{ ticket_url }}" class="button">Voir le Ticket</a>
+
+<p>Merci pour votre patience,<br>L'équipe Support Ticket DGM</p>
+{% endblock %}
