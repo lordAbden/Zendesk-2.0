@@ -10,6 +10,7 @@
     },
     "dependencies": {
         // Security: xlsx package updated to v0.20.2 to fix CVE-2023-30533 and CVE-2024-22363
+        // TODO: Consider adding package-lock.json integrity checks
         "@tailwindcss/typography": "^0.5.16",
         "@tanstack/react-query": "^5.85.5",
         "@types/xlsx": "^0.0.35",
